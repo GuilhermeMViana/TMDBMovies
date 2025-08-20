@@ -45,11 +45,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieTableViewCell
         let movie = movies[indexPath.row]
         
-        cell.textLabel?.text = movie.title
-        cell.textLabel?.textColor = .white
+        let formattedDate = movie.releaseDate.replacingOccurrences(of: "-", with: "/")
+        
+        cell.lbTitle?.text = movie.title
+        cell.lbReleaseDate?.text = "Lançamento: \(formattedDate)"
+        cell.ivMovie.image = UIImage(named: movie.posterPath ?? "")
         return cell
     }
 
