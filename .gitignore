@@ -3,6 +3,7 @@
 *.xcuserdatad/
 *.xcuserstate
 xcshareddata/
+xcschememanagement
 !xcshareddata/xcschemes/
 !xcshareddata/SchemeActions/
 !xcshareddata/IDETemplateMacros.plist
