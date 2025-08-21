@@ -1,40 +1,47 @@
-# Exclui arquivos de configuração de usuário do Xcode
+# Xcode
+#
+# Exclui arquivos de configuração de usuário e de esquema
+# para evitar conflitos de merge.
 .DS_Store
-*.xcuserdatad/
-*.xcuserstate
-xcshareddata/
-xcschememanagement
-!xcshareddata/xcschemes/
-!xcshareddata/SchemeActions/
-!xcshareddata/IDETemplateMacros.plist
+*.pbxuser
+*.xcworkspace/
+!*.xcworkspace/xcshareddata/
+*.xcodeproj/
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/xcshareddata/xcschemes/
+!*.xcodeproj/xcshareddata/SchemeActions/
+!*.xcodeproj/xcshareddata/IDETemplateMacros.plist
+xcuserdata/
 
-# Ignora o diretório de arquivos compilados
-build/
-
-# Ignora o diretório de pacotes e dependências
+# Swift Package Manager
+# Ignora arquivos de dependência e de build do Swift Package Manager
+.build/
 .swiftpm/
 
-# Exclui dados de testes
+# Diretório de build do Xcode
 DerivedData/
 
-# Ignora arquivos de depuração
-*.dSYM/
+# Arquivos compilados
 *.o
 *.out
 *.a
 *.lo
 *.li
 
-# Exclui arquivos de cache
+# Arquivos de depuração e de dSYM
+*.dSYM/
+*.o
 *.swp
-.git/
-.svn/
-.hg/
-.project
-.settings
-.cproject
-.externalToolBuilders
+
+# Arquivos gerados por scripts
+*.h
+*.m
+*.mm
+*.c
+*.swift
+*.s
 
 # Outros
-*.pbxuser
-xcuserdata/
+.idea/
+.vscode/
