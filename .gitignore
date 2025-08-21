@@ -1,0 +1,39 @@
+# Exclui arquivos de configuração de usuário do Xcode
+.DS_Store
+*.xcuserdatad/
+*.xcuserstate
+xcshareddata/
+!xcshareddata/xcschemes/
+!xcshareddata/SchemeActions/
+!xcshareddata/IDETemplateMacros.plist
+
+# Ignora o diretório de arquivos compilados
+build/
+
+# Ignora o diretório de pacotes e dependências
+.swiftpm/
+
+# Exclui dados de testes
+DerivedData/
+
+# Ignora arquivos de depuração
+*.dSYM/
+*.o
+*.out
+*.a
+*.lo
+*.li
+
+# Exclui arquivos de cache
+*.swp
+.git/
+.svn/
+.hg/
+.project
+.settings
+.cproject
+.externalToolBuilders
+
+# Outros
+*.pbxuser
+xcuserdata/
