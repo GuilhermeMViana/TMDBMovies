@@ -14,4 +14,18 @@ struct Movie: Codable {
     var releaseDate: String
     var posterPath: String?
     var userRating: Double
+    // translate api keys into struct Movie
+    enum CodingKeys: String, CodingKey {
+            case id
+            case title
+            case description = "overview"
+            case releaseDate = "release_date"
+            case posterPath = "poster_path"
+            case userRating = "vote_average"
+        }
+}
+// Api returns necessary data inside a results key
+// Struct to decode data from results
+struct MovieResponse: Decodable {
+    let results: [Movie]
 }

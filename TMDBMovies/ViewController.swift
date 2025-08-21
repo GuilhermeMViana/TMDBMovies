@@ -9,19 +9,15 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    let movies: [Movie] = [
-        Movie(id: 1, title: "Órfã 2: A Origem", description: "", releaseDate: "2022-07-27", posterPath: nil, userRating: 7.2),
-        Movie(id: 2, title: "Minions 2: A Origem de Gru", description: "", releaseDate: "2022-06-29", posterPath: nil, userRating: 7.8),
-        Movie(id: 3, title: "Thor: Amor e Trovão", description: "", releaseDate: "2022-07-06", posterPath: nil, userRating: 6.8),
-        Movie(id: 4, title: "Avatar", description: "", releaseDate: "2009-12-18", posterPath: nil, userRating: 8.8),
-    ]
+    var movies: [Movie] = []
+    let api = Network()
 
     @IBOutlet weak var moviesTable: UITableView!
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         
         moviesTable.dataSource = self
         moviesTable.delegate = self
@@ -38,6 +34,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         gradient.frame = view.bounds
         // Insert gradient in screen
         view.layer.insertSublayer(gradient, at: 0)
+        
+        Task {
+            do {
+                let fetchedMovies = try await api.fetchPopularMovies()
+                
+                DispatchQueue.main.async {
+                    self.movies = fetchedMovies
+                    self.moviesTable.reloadData()
+                    print("Filmes")
+                }
+            } catch {print(error.localizedDescription)}
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,7 +60,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.lbTitle?.text = movie.title
         cell.lbReleaseDate?.text = "Lançamento: \(formattedDate)"
-        cell.ivMovie.image = UIImage(named: movie.posterPath ?? "")
+        
+        if let posterPath = movie.posterPath,
+           let url = URL(string: "https://image.tmdb.org/t/p/original\(posterPath)") {
+            // call method from extension
+            cell.ivMovie.load(url: url)
+        }
         return cell
     }
 
